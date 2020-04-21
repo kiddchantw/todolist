@@ -63,11 +63,19 @@ include ("dbconfig.php");
       <?php 
 					$sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
 					$sql = mysqli_query($connectDB, $sql_query_showAll);  
-					$row_showAll = mysqli_num_rows($sql) ;
+          $row_showAll = mysqli_num_rows($sql) ;
+          
+					// $sql_query_showAll = "select id ID, content Task, finsishOrNot Status, creat_at Time from tasks where user_id = '1'";
+          // $showAllrow = 0 
+          //$row_showAll = showAllResult($sql_query_showAll);
+          $i=0;
 					if ($row_showAll != 0 ){
 						while($result_showAll = mysqli_fetch_assoc($sql)){
-							echo "<tr>";
-							echo "<td>".$result_showAll['ID']."</td>";
+              $i++;
+              echo "<tr>";
+              echo "<td>".$i."</td>";
+              // echo "<td>".$result_showAll['index']."</td>";
+							// echo "<td>".$result_showAll['ID']."</td>";
               echo "<td>".$result_showAll['Task']."</td>";
               echo "<td>".$result_showAll['Time']."</td>";
               if  ($result_showAll['Status'] == 0 ){
@@ -76,10 +84,10 @@ include ("dbconfig.php");
                 echo "<td>"."完成"."</td>";
               }
               //echo "<td>".$result_showAll['Status']."</td>";
-              echo "<td><input type=\"submit\" name=\"more\" value=\"more\">  
-              </td>";
-
-          
+              // echo "<td><input type=\"submit\" name=\"more\" value=\"more\">  
+              echo "<td>";
+              echo "<button type=\"button\" class=\"btn btn-outline-dark\">more</button>";
+              echo "</td>";
 							echo "</tr>";
 						}
 					}
