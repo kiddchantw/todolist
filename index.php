@@ -19,12 +19,12 @@ include ("dbconfig.php");
 <div class="container-fluid" style="background-color:#84C1FF;" >
 <h1>login area</h1>
 
-<form class="form-inline" action="/action_page.php">
-  <label for="email"> Account :  </label>
-  <input type="email" class="form-control" placeholder="input" >
+<form class="form-inline" action="controller.php" method = "post">
+  <label for="text"> Account :  </label>
+  <input type="email" class="form-control" placeholder="input" name = "input_name" >
   <label for="pwd"> Password :  </label>
-  <input type="password" class="form-control" placeholder="Enter password"> 
-  <button type="submit" class="btn btn-primary"> Login </button>
+  <input type="password" class="form-control" placeholder="Enter password" name = "input_password"> 
+  <button type="submit" class="btn btn-primary" name="btn_login"> Login </button>
 </form>
     <!--
     <form action="test_post.php" method="post">　
@@ -51,50 +51,69 @@ include ("dbconfig.php");
       </tr>
     </thead>
     <tbody>
-      <!-- <tr>
-        <td>001</td>
-        <td>test </td>
-        <td>2020-04-14 20:20</td>
-        <td>
-        <a href="#" class="btn btn-info" role="button">finish</a>
-        <button type="button" class="btn btn-warning">Warning</button> -->
-        <!-- </td>
-      </tr> -->
-      <?php 
-					$sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
-					$sql = mysqli_query($connectDB, $sql_query_showAll);  
-          $row_showAll = mysqli_num_rows($sql) ;
-          
-					// $sql_query_showAll = "select id ID, content Task, finsishOrNot Status, creat_at Time from tasks where user_id = '1'";
-          // $showAllrow = 0 
-          //$row_showAll = showAllResult($sql_query_showAll);
-          $i=0;
-					if ($row_showAll != 0 ){
-						while($result_showAll = mysqli_fetch_assoc($sql)){
-              $i++;
-              echo "<tr>";
-              echo "<td>".$i."</td>";
-              // echo "<td>".$result_showAll['index']."</td>";
-							// echo "<td>".$result_showAll['ID']."</td>";
-              echo "<td>".$result_showAll['Task']."</td>";
-              echo "<td>".$result_showAll['Time']."</td>";
-              if  ($result_showAll['Status'] == 0 ){
-                echo "<td>"."未完成"."</td>";
-              }else{
-                echo "<td>"."完成"."</td>";
+      <form method = "post"  action="controller.php" >
+        <?php 
+            $sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
+            $sql = mysqli_query($connectDB, $sql_query_showAll);  
+            $row_showAll = mysqli_num_rows($sql) ;
+            
+            $i=0;
+            if ($row_showAll != 0 ){
+              while($result_showAll = mysqli_fetch_assoc($sql)){
+                $i++;
+                echo "<tr>";
+                echo "<td>".$i."</td>";
+                echo "<td>".$result_showAll['Task']."</td>";
+                echo "<td>".$result_showAll['Time']."</td>";
+                echo "<td>";
+                $task_status = $result_showAll['Status'] ;
+                $task_id = $result_showAll['ID'] ;
+
+                if($task_status == 0) {
+                  // echo "$task_id";
+                  echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"btn_done\"  value = \"$task_id\" > 完成 </button>";
+
+                  // if($i == 2){
+
+                  // }
+                  // else{
+                  //   echo "未完成";
+                  // }
+                  
+    
+                }else{
+                  echo "已完成";
+                }
+                echo "</td>";
+                //echo "<td>".$result_showAll['Status']."</td>";
+                // echo "<td><input type=\"submit\" name=\"more\" value=\"more\">  
+                echo "<td>";
+                //echo "<button type=\"submit\" class=\"btn btn-outline-dark\" onclick=\"moreDetail()\" >more</button>";
+                echo "<button type=\"submit\" class=\"btn btn-outline-dark\" name=\"btn_more\" > more </button>";
+                echo "</td>";
+                echo "</tr>";
               }
-              //echo "<td>".$result_showAll['Status']."</td>";
-              // echo "<td><input type=\"submit\" name=\"more\" value=\"more\">  
-              echo "<td>";
-              echo "<button type=\"button\" class=\"btn btn-outline-dark\">more</button>";
-              echo "</td>";
-							echo "</tr>";
-						}
-					}
-					?>
+            }
+          ?>  
+      </form> 
+
     </tbody>
   </table>
 </div>
+<!-- 
+<button onclick="myFunction()">Click me</button>
+<p id="demo"></p> -->
+
+<!-- <script>
+function moreDetail() {
+  // document.getElementById("demo").innerHTML = "Hello World";
+  alert("hello word ");
+}
+</script> -->
+
+<?php
+  
+?>
 
 
 

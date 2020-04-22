@@ -24,17 +24,17 @@ function connectMySQL()
 }
 
 
-
-function showAllResult($query)
-{
-    global $connectDB;
-    //$sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
-    //$sql = mysqli_query($connectDB, $sql_query_showAll);  
-    $sql = mysqli_query($connectDB, $query);
-    $row1_showAll = mysqli_num_rows($sql);
-    if ($row1_showAll != 0) {
-        return $row1_showAll;
-    } else {
-        return 0;
-    }
-}
+// search用mvc方式不推，因為要生成ui還是在index做比較方便
+// function showAllResult($query)
+// {
+//     global $connectDB;
+//     //$sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
+//     //$sql = mysqli_query($connectDB, $sql_query_showAll);  
+//     $sql = mysqli_query($connectDB, $query);
+//     $row1_showAll = mysqli_num_rows($sql);
+//     if ($row1_showAll != 0) {
+//         return $row1_showAll;
+//     } else {
+//         return 0;
+//     }
+// }
