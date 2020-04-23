@@ -52,7 +52,7 @@ include ("dbconfig.php");
     </thead>
     <tbody>
       <form method = "post"  action="controller.php" >
-        <?php 
+        <?php   
             $sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
             $sql = mysqli_query($connectDB, $sql_query_showAll);  
             $row_showAll = mysqli_num_rows($sql) ;
@@ -70,17 +70,7 @@ include ("dbconfig.php");
                 $task_id = $result_showAll['ID'] ;
 
                 if($task_status == 0) {
-                  // echo "$task_id";
                   echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"btn_done\"  value = \"$task_id\" > 完成 </button>";
-
-                  // if($i == 2){
-
-                  // }
-                  // else{
-                  //   echo "未完成";
-                  // }
-                  
-    
                 }else{
                   echo "已完成";
                 }
@@ -110,9 +100,43 @@ function moreDetail() {
   alert("hello word ");
 }
 </script> -->
+<!-- <form action="<?php $_SERVER["PHP_SELF"];?>" method = "post">
+  <input type="submit" name="submitButton" value="存入" />
+</form>  -->
+<a href="" onclick="removeday(event)" class="deletebtn">Delete</a>
+
+
+<script>
+  async function removeday(e) {
+    e.preventDefault(); 
+    // document.body.innerHTML+= '<br>'+ await(await fetch('?remove=1')).text();
+    document.body.innerHTML = '<br>'+ await(await fetch('?remove=1')).text();
+
+
+
+  }
+</script>
+
+
+
 
 <?php
+  function removeday() { echo 'Day removed'; }
+
+  if (isset($_GET['remove'])) { return removeday(); }
   
+
+
+
+  // if(isset($_POST['submitButton']) && ($_SERVER["REQUEST_METHOD"] == "POST" )  ){
+  //  $this->testPhpHtml();
+  // }
+
+  // function testPhpHtml(){
+  //       echo "testPhpHtml";
+
+  // }
+
 ?>
 
 
