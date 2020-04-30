@@ -25,13 +25,21 @@ if ((isset($_POST['btn_login'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
     }else{
         echo "帳號???";
     }
-
-    
 }
 
 
 
-/*  更新資料狀態  */
+/* add task */
+if ((isset($_POST['input_task'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
+    echo "input_task click <br>" ;
+    $task_content = $_POST['input_task'];
+    echo "task : $task_content";
+}
+
+
+
+
+/*  更新task完成資料狀態  */
 if ((isset($_POST['btn_done'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
     echo "btn_done";
     // var_dump($_POST['btn_done']);

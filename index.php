@@ -39,7 +39,14 @@ include ("dbconfig.php");
 </form>
 </div>
 <div class="container-fluid" style="background-color:#FFF8D7;">
+    <form class="form-inline" action="controller.php" method = "post">
     <h1>About task </h1>
+    <input type="text"  name = "input_task">
+    <!-- <button type="submit" class="btn btn-primary" name="input_task" > add </button> -->
+    <input type="submit" name="input_task" value=" add "/>
+</form>
+
+
     <table class="table">
     <thead>
       <tr>
@@ -68,52 +75,34 @@ include ("dbconfig.php");
                 echo "<td>";
                 $task_status = $result_showAll['Status'] ;
                 $task_id = $result_showAll['ID'] ;
-
                 if($task_status == 0) {
                   echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"btn_done\"  value = \"$task_id\" > 完成 </button>";
                 }else{
                   echo "已完成";
                 }
                 echo "</td>";
-                //echo "<td>".$result_showAll['Status']."</td>";
-                // echo "<td><input type=\"submit\" name=\"more\" value=\"more\">  
                 echo "<td>";
-                //echo "<button type=\"submit\" class=\"btn btn-outline-dark\" onclick=\"moreDetail()\" >more</button>";
                 echo "<button type=\"submit\" class=\"btn btn-outline-dark\" name=\"btn_more\" > more </button>";
                 echo "</td>";
                 echo "</tr>";
               }
             }
           ?>  
-      </form> 
+        </form> 
 
     </tbody>
   </table>
 </div>
-<!-- 
-<button onclick="myFunction()">Click me</button>
-<p id="demo"></p> -->
 
-<!-- <script>
-function moreDetail() {
-  // document.getElementById("demo").innerHTML = "Hello World";
-  alert("hello word ");
-}
-</script> -->
-<!-- <form action="<?php $_SERVER["PHP_SELF"];?>" method = "post">
-  <input type="submit" name="submitButton" value="存入" />
-</form>  -->
+
+
 <a href="" onclick="removeday(event)" class="deletebtn">Delete</a>
 
 
 <script>
   async function removeday(e) {
     e.preventDefault(); 
-    // document.body.innerHTML+= '<br>'+ await(await fetch('?remove=1')).text();
     document.body.innerHTML = '<br>'+ await(await fetch('?remove=1')).text();
-
-
-
   }
 </script>
 
@@ -125,18 +114,6 @@ function moreDetail() {
 
   if (isset($_GET['remove'])) { return removeday(); }
   
-
-
-
-  // if(isset($_POST['submitButton']) && ($_SERVER["REQUEST_METHOD"] == "POST" )  ){
-  //  $this->testPhpHtml();
-  // }
-
-  // function testPhpHtml(){
-  //       echo "testPhpHtml";
-
-  // }
-
 ?>
 
 
