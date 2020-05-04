@@ -17,34 +17,25 @@ include ("dbconfig.php");
 <body>
 <div class="container">
 <div class="container-fluid" style="background-color:#84C1FF;" >
-<h1>login area</h1>
+<h1>login area</h1>    please login first<br>
 
 <form class="form-inline" action="controller.php" method = "post">
   <label for="text"> Account :  </label>
-  <input type="email" class="form-control" placeholder="input" name = "input_name" >
+  <input type="email" class="form-control" name = "input_name" >
   <label for="pwd"> Password :  </label>
-  <input type="password" class="form-control" placeholder="Enter password" name = "input_password"> 
-  <button type="submit" class="btn btn-primary" name="btn_login"> Login </button>
+  <input type="password" class="form-control" name = "input_password"> 
+  <button type="submit" class="btn btn-warning" name="btn_login"> Login </button>
 </form>
-    <!--
-    <form action="test_post.php" method="post">　
-    姓名: <input type="text" name="Email"/>
-　  <input type="submit" value="送出表單"/>
-    <button type="button" class="btn btn-secondary">Secondary</button>
-    -->
-    <br>
-    please login first<br>
-    <br>
-
-</form>
+<br>    
 </div>
 <div class="container-fluid" style="background-color:#FFF8D7;">
-    <form class="form-inline" action="controller.php" method = "post">
     <h1>About task </h1>
+
+    <form class="form-inline" action="controller.php" method = "post">
     <input type="text"  name = "input_task">
-    <!-- <button type="submit" class="btn btn-primary" name="input_task" > add </button> -->
-    <input type="submit" name="input_task" value=" add "/>
-</form>
+    <!-- <button type="submit" class="btn btn-primary" name="task_add" > add </button> -->
+    <input type="submit" name="task_add" value=" add "/>
+    </form>
 
 
     <table class="table">
@@ -60,7 +51,7 @@ include ("dbconfig.php");
     <tbody>
       <form method = "post"  action="controller.php" >
         <?php   
-            $sql_query_showAll = "select id `ID`, content `Task`, finsishOrNot `Status`, creat_at `Time` from tasks where user_id = '1'";
+            $sql_query_showAll = "select id `ID`, content `Task`, done `Status`, creat_at `Time` from tasks where user_id = '1'";
             $sql = mysqli_query($connectDB, $sql_query_showAll);  
             $row_showAll = mysqli_num_rows($sql) ;
             
@@ -82,7 +73,9 @@ include ("dbconfig.php");
                 }
                 echo "</td>";
                 echo "<td>";
-                echo "<button type=\"submit\" class=\"btn btn-outline-dark\" name=\"btn_more\" > more </button>";
+                //echo "<button type=\"submit\" class=\"btn btn-outline-dark\" name=\"btn_more\" > more </button>";
+                echo "<button type=\"submit\" class=\"btn btn-danger\" name=\"btn_delete\" value = \"$task_id\" > delete </button>";
+
                 echo "</td>";
                 echo "</tr>";
               }
@@ -95,9 +88,9 @@ include ("dbconfig.php");
 </div>
 
 
-
+<div>
+<!-- 當頁點擊事件偵測 -->
 <a href="" onclick="removeday(event)" class="deletebtn">Delete</a>
-
 
 <script>
   async function removeday(e) {
@@ -106,15 +99,19 @@ include ("dbconfig.php");
   }
 </script>
 
-
-
-
 <?php
   function removeday() { echo 'Day removed'; }
-
-  if (isset($_GET['remove'])) { return removeday(); }
-  
+  if (isset($_GET['remove'])) { return removeday(); }  
 ?>
+</div> 
+<div>
+<!-- 當頁點擊事件傳值 -->
+
+
+
+
+
+</div>
 
 
 

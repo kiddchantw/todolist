@@ -30,10 +30,16 @@ if ((isset($_POST['btn_login'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
 
 
 /* add task */
-if ((isset($_POST['input_task'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
-    echo "input_task click <br>" ;
+if ((isset($_POST['task_add'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
+     //echo "input_task click <br>" ;
     $task_content = $_POST['input_task'];
-    echo "task : $task_content";
+     //echo "task : $task_content <br>";
+    var_dump($task_content);
+    $insert_query = "INSERT INTO tasks (user_id, content, creat_at) VALUES (1 ,'$task_content' ,now())" ;
+    // echo "sql_query_add : $sql_query_add  <br>";
+
+    mysqli_query($connectDB, $insert_query);   
+    header('Location: index.php');
 }
 
 
@@ -44,19 +50,22 @@ if ((isset($_POST['btn_done'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
     echo "btn_done";
     // var_dump($_POST['btn_done']);
     $update_id = $_POST['btn_done'];
-    $sql_query_update = "UPDATE tasks SET finsishOrNot = true WHERE id = $update_id ";
-    mysqli_query($connectDB, $sql_query_update);  
+    $update_query = "UPDATE tasks SET done = true ,update_at = now() WHERE id = $update_id ";
+    mysqli_query($connectDB, $update_query);  
     header('Location: index.php');
 }
 
 
   
   
-  
-if ((isset($_POST['btn_more'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
-    echo "btn_more";
+  /*  delete task  */
+if ((isset($_POST['btn_delete'])) && ($_SERVER["REQUEST_METHOD"] == "POST" ) ) {
+    //echo "btn_more";
     // header('Location: index.php');
-
+    $delete_id = $_POST['btn_delete'];
+    $delete_query = "delete from tasks where id = $delete_id ";
+    mysqli_query($connectDB, $delete_query);  
+    header('Location: index.php');
 }
 
 
