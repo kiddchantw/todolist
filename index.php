@@ -30,7 +30,6 @@ include ("dbconfig.php");
 </div>
 <div class="container-fluid" style="background-color:#FFF8D7;">
     <h1>About task </h1>
-
     <form class="form-inline" action="controller.php" method = "post">
     <input type="text"  name = "input_task">
     <!-- <button type="submit" class="btn btn-primary" name="task_add" > add </button> -->
@@ -51,30 +50,30 @@ include ("dbconfig.php");
     <tbody>
       <form method = "post"  action="controller.php" >
         <?php   
-            $sql_query_showAll = "select id `ID`, content `Task`, done `Status`, creat_at `Time` from tasks where user_id = '1'";
-            $sql = mysqli_query($connectDB, $sql_query_showAll);  
-            $row_showAll = mysqli_num_rows($sql) ;
+            $queryshowAll = "select id `ID`, content `Task`, done `Status`, creat_at `Time` from tasks where user_id = '1'";
+            $sql = mysqli_query($connectDB, $queryshowAll);  
+            $rowShowAll = mysqli_num_rows($sql) ;
             
             $i=0;
-            if ($row_showAll != 0 ){
-              while($result_showAll = mysqli_fetch_assoc($sql)){
+            if ($rowShowAll != 0 ){
+              while($resultShowAll = mysqli_fetch_assoc($sql)){
                 $i++;
                 echo "<tr>";
                 echo "<td>".$i."</td>";
-                echo "<td>".$result_showAll['Task']."</td>";
-                echo "<td>".$result_showAll['Time']."</td>";
+                echo "<td>".$resultShowAll['Task']."</td>";
+                echo "<td>".$resultShowAll['Time']."</td>";
                 echo "<td>";
-                $task_status = $result_showAll['Status'] ;
-                $task_id = $result_showAll['ID'] ;
-                if($task_status == 0) {
-                  echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"btn_done\"  value = \"$task_id\" > 完成 </button>";
+                $taskStatus = $resultShowAll['Status'] ;
+                $taskId = $resultShowAll['ID'] ;
+                if($taskStatus == 0) {
+                  echo "<button type=\"submit\" class=\"btn btn-primary\" name=\"btn_done\"  value = \"$taskId\" > 完成 </button>";
                 }else{
                   echo "已完成";
                 }
                 echo "</td>";
                 echo "<td>";
                 //echo "<button type=\"submit\" class=\"btn btn-outline-dark\" name=\"btn_more\" > more </button>";
-                echo "<button type=\"submit\" class=\"btn btn-danger\" name=\"btn_delete\" value = \"$task_id\" > delete </button>";
+                echo "<button type=\"submit\" class=\"btn btn-danger\" name=\"btn_delete\" value = \"$taskId\" > delete </button>";
 
                 echo "</td>";
                 echo "</tr>";
@@ -89,7 +88,7 @@ include ("dbconfig.php");
 
 
 <div>
-<!-- 當頁點擊事件偵測 -->
+<!-- 當頁點擊事件偵測 會導致原本的按鈕沒有反應-->
 <a href="" onclick="removeday(event)" class="deletebtn">Delete</a>
 
 <script>
